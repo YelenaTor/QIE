@@ -6,7 +6,7 @@ namespace Quartermaster.Data.Database;
 /// <summary>
 /// EF Core DbContext for the Quartermaster SQLite database.
 /// </summary>
-public class QuartermasterDb : DbContext
+public class QuartermasterDb : DbContext, IDisposable
 {
     public DbSet<ItemEntity> Items { get; set; } = null!;
     public DbSet<WatchlistEntity> Watchlist { get; set; } = null!;
@@ -22,6 +22,23 @@ public class QuartermasterDb : DbContext
     {
         var pluginDir = Plugin.PluginInterface.GetPluginConfigDirectory();
         _dbPath = Path.Combine(pluginDir, "quartermaster.db");
+    }
+
+    /// <summary>
+    /// Create the database file and tables if they don't exist.
+    /// Call once on plugin load.
+    /// </summary>
+    public async Task InitializeAsync()
+    {
+        try
+        {
+            await Database.EnsureCreatedAsync();
+            Plugin.Log.Information($"[QM] Database initialized at: {_dbPath}");
+        }
+        catch (Exception ex)
+        {
+            Plugin.Log.Error(ex, "[QM] Failed to initialize database.");
+        }
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
