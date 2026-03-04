@@ -1,0 +1,44 @@
+<udt>
+    <!--
+        Profit Badge — colored pill showing profit margin.
+    -->
+
+    <template name="profit-badge">
+        <argument name="value" type="string" default="+0%"/>
+        <root>
+            <node class="qm-badge profit-badge"/>
+        </root>
+    </template>
+
+    <!--
+        Trend Arrow — directional indicator for price movement.
+    -->
+
+    <template name="trend-arrow">
+        <root>
+            <node class="trend-arrow"/>
+        </root>
+    </template>
+
+    <![CDATA[
+    .profit-badge {
+        &.positive { background-color: 0x804CAF50; color: 0xFFFFFFFF; }
+        &.negative { background-color: 0x80F44336; color: 0xFFFFFFFF; }
+        &.neutral  { background-color: 0x40FFFFFF; color: 0xFFE0E0E0; }
+    }
+
+    .trend-arrow {
+        size: 16 16;
+        anchor: middle-center;
+        text-align: middle-center;
+        font: 2;
+        font-size: 12;
+        auto-size: fit;
+
+        &.rising   { color: 0xFF4CAF50; }
+        &.falling  { color: 0xFFF44336; }
+        &.stable   { color: 0xFF909090; }
+        &.volatile { color: 0xFFFF9800; }
+    }
+    ]]>
+</udt>

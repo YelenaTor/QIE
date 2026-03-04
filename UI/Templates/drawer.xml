@@ -1,0 +1,81 @@
+<udt>
+    <!--
+        Drawer — 380px wide panel that slides out from the anchor bar.
+        Contains a header with title + close button, scrollable body, and footer.
+    -->
+
+    <node id="Drawer" class="drawer">
+        <node class="bg"/>
+        <node id="DrawerHeader" class="drawer-header">
+            <node id="DrawerTitle" class="drawer-title qm-text"/>
+            <node id="DrawerClose" class="drawer-close"/>
+        </node>
+        <node id="DrawerBody" class="drawer-body scrollbars"/>
+        <node id="DrawerFooter" class="drawer-footer"/>
+    </node>
+
+    <![CDATA[
+    .drawer {
+        size: 380 0;
+        auto-size: fit grow;
+        anchor: top-left;
+
+        & > .bg {
+            anchor: none;
+            auto-size: grow;
+            background-gradient: vertical 0xE8181818 0xF0202020;
+            border-color: 0x40FFD700;
+            border-width: 1;
+            border-radius: 8;
+            shadow-size: 24;
+            shadow-inset: 8;
+        }
+    }
+
+    .drawer-header {
+        auto-size: grow fit;
+        padding: 10 14;
+        gap: 8;
+        border-color: 0x20FFFFFF;
+        border-width: 0 0 1 0;
+    }
+
+    .drawer-title {
+        font-size: 15;
+        color: 0xFFFFD700;
+        auto-size: grow fit;
+        anchor: middle-left;
+    }
+
+    .drawer-close {
+        size: 24 24;
+        anchor: middle-center;
+        text-align: middle-center;
+        font: 2;
+        font-size: 14;
+        color: 0xFF909090;
+        border-radius: 4;
+
+        &:hover {
+            color: 0xFFF44336;
+            background-color: 0x30F44336;
+        }
+    }
+
+    .drawer-body {
+        auto-size: grow;
+        padding: 8 12;
+        gap: 6;
+        flow: vertical;
+        overflow: scroll;
+    }
+
+    .drawer-footer {
+        auto-size: grow fit;
+        padding: 8 12;
+        border-color: 0x20FFFFFF;
+        border-width: 1 0 0 0;
+        gap: 8;
+    }
+    ]]>
+</udt>

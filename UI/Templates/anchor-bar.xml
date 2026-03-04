@@ -1,0 +1,94 @@
+<udt>
+    <!--
+        Anchor Bar — 48px wide vertical strip pinned to screen edge.
+        Contains icon buttons that toggle drawer panels.
+
+        Classes:
+            ".left"  — anchored to left screen edge
+            ".right" — anchored to right screen edge
+    -->
+
+    <node id="AnchorBar" class="anchor-bar right">
+        <node class="bg"/>
+        <node id="Icons" class="icons"/>
+    </node>
+
+    <![CDATA[
+    .anchor-bar {
+        size: 48 0;
+        auto-size: fit grow;
+        anchor: middle-center;
+        gap: 4;
+        padding: 8 0;
+
+        & > .bg {
+            anchor: none;
+            auto-size: grow;
+            background-gradient: vertical 0x90181818 0xA0181818;
+            border-color: 0x40FFD700;
+            padding: 1;
+        }
+
+        &.right {
+            & > .bg {
+                border-width: 1 0 1 1;
+                rounded-corners: top-left bottom-left;
+                border-radius: 8;
+            }
+        }
+
+        &.left {
+            & > .bg {
+                border-width: 1 1 1 0;
+                rounded-corners: top-right bottom-right;
+                border-radius: 8;
+            }
+        }
+
+        /* Individual icon button */
+        & > .icons {
+            auto-size: fit grow;
+            flow: vertical;
+            gap: 2;
+            padding: 4;
+            anchor: top-center;
+        }
+    }
+
+    .anchor-icon {
+        size: 36 36;
+        anchor: middle-center;
+        text-align: middle-center;
+        font: 2;
+        font-size: 16;
+        color: 0xFF909090;
+        border-radius: 6;
+        auto-size: fit;
+
+        &:hover {
+            color: 0xFFFFD700;
+            background-color: 0x30FFD700;
+        }
+
+        &.active {
+            color: 0xFFFFD700;
+            background-color: 0x20FFD700;
+            stroke-color: 0x40FFD700;
+            stroke-width: 1;
+            stroke-inset: 1;
+            stroke-radius: 5;
+        }
+    }
+
+    .anchor-icon-badge {
+        anchor: top-right;
+        background-color: 0xFFF44336;
+        border-radius: 8;
+        padding: 1 4;
+        font: 0;
+        font-size: 9;
+        color: 0xFFFFFFFF;
+        auto-size: fit;
+    }
+    ]]>
+</udt>

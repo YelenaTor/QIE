@@ -1,0 +1,106 @@
+<udt>
+    <![CDATA[
+    /* ── Quartermaster Global Styles ── */
+
+    /* Color palette — referenced by name throughout templates. */
+
+    .scrollbars {
+        scrollbar-track-color: 0x20FFFFFF;
+        scrollbar-thumb-color: 0x40FFFFFF;
+        scrollbar-thumb-hover-color: 0x60FFFFFF;
+        scrollbar-thumb-active-color: 0x80FFFFFF;
+    }
+
+    /* Base text style used across all panels. */
+    .qm-text {
+        font: 0;
+        font-size: 13;
+        color: 0xFFE0E0E0;
+        outline-color: 0x80000000;
+        outline-size: 1;
+
+        &.muted { color: 0xFF909090; font-size: 11; }
+        &.accent { color: 0xFFFFD700; }
+        &.positive { color: 0xFF4CAF50; }
+        &.negative { color: 0xFFF44336; }
+        &.monospace { font: 1; }
+    }
+
+    /* Card container — used for alert cards, item rows, etc. */
+    .qm-card {
+        background-color: 0x30FFFFFF;
+        border-radius: 6;
+        stroke-color: 0x20FFFFFF;
+        stroke-width: 1;
+        stroke-inset: 1;
+        stroke-radius: 4;
+        padding: 8;
+        gap: 6;
+        auto-size: grow fit;
+
+        &:hover {
+            background-color: 0x40FFFFFF;
+            stroke-color: 0x40FFD700;
+        }
+    }
+
+    /* Section header inside panels. */
+    .qm-section-header {
+        font: 0;
+        font-size: 11;
+        color: 0xFF909090;
+        outline-size: 0;
+        padding: 4 0 2 0;
+        auto-size: grow fit;
+    }
+
+    /* Badge — small pill for counts, status, etc. */
+    .qm-badge {
+        background-color: 0x40FFFFFF;
+        border-radius: 10;
+        padding: 2 8;
+        auto-size: fit;
+        font: 0;
+        font-size: 11;
+        color: 0xFFE0E0E0;
+
+        &.alert { background-color: 0x80F44336; color: 0xFFFFFFFF; }
+        &.profit { background-color: 0x804CAF50; color: 0xFFFFFFFF; }
+        &.warning { background-color: 0x80FF9800; color: 0xFFFFFFFF; }
+    }
+
+    /* Button base */
+    .qm-button {
+        background-color: 0x40FFFFFF;
+        border-radius: 4;
+        stroke-color: 0x20FFFFFF;
+        stroke-width: 1;
+        stroke-inset: 1;
+        stroke-radius: 3;
+        padding: 4 12;
+        auto-size: fit;
+        font: 0;
+        font-size: 13;
+        color: 0xFFE0E0E0;
+        anchor: middle-center;
+
+        &:hover {
+            background-color: 0x60FFFFFF;
+            stroke-color: 0x40FFD700;
+            color: 0xFFFFFFFF;
+        }
+
+        &.primary {
+            background-color: 0x80FFD700;
+            color: 0xFF1A1A1A;
+            &:hover { background-color: 0xA0FFD700; }
+        }
+
+        &.danger {
+            background-color: 0x80F44336;
+            color: 0xFFFFFFFF;
+            &:hover { background-color: 0xA0F44336; }
+        }
+    }
+    ]]>
+</udt>

@@ -1,0 +1,75 @@
+<udt>
+    <!--
+        Alert Card — a single actionable alert row.
+        Shows item name, severity icon, profit projection, and action buttons.
+    -->
+
+    <template name="alert-card">
+        <argument name="severity" type="string" default="info"/>
+        <root>
+            <node class="qm-card alert-card">
+                <node class="alert-card-header">
+                    <node class="alert-severity-icon"/>
+                    <node class="alert-item-name qm-text"/>
+                    <node class="alert-profit qm-text accent"/>
+                </node>
+                <node class="alert-card-body">
+                    <node class="alert-detail qm-text muted"/>
+                </node>
+                <node class="alert-card-actions">
+                    <slot/>
+                </node>
+            </node>
+        </root>
+    </template>
+
+    <![CDATA[
+    .alert-card {
+        flow: vertical;
+        gap: 4;
+
+        &:hover { stroke-color: 0x40FFD700; }
+    }
+
+    .alert-card-header {
+        auto-size: grow fit;
+        gap: 8;
+    }
+
+    .alert-severity-icon {
+        size: 20 20;
+        anchor: middle-center;
+        text-align: middle-center;
+        font: 2;
+        font-size: 14;
+        border-radius: 10;
+
+        &.info { color: 0xFF2196F3; background-color: 0x202196F3; }
+        &.warning { color: 0xFFFF9800; background-color: 0x20FF9800; }
+        &.opportunity { color: 0xFF4CAF50; background-color: 0x204CAF50; }
+        &.urgent { color: 0xFFF44336; background-color: 0x20F44336; }
+    }
+
+    .alert-item-name {
+        auto-size: grow fit;
+        anchor: middle-left;
+    }
+
+    .alert-profit {
+        auto-size: fit;
+        anchor: middle-right;
+        font-size: 14;
+    }
+
+    .alert-card-body {
+        auto-size: grow fit;
+        padding: 0 0 0 28;
+    }
+
+    .alert-card-actions {
+        auto-size: grow fit;
+        gap: 6;
+        padding: 4 0 0 28;
+    }
+    ]]>
+</udt>

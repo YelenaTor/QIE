@@ -38,3 +38,6 @@ bld/
 
 # API secrets
 .env
+
+# Misc files
+Quartermaster-Architecture.md

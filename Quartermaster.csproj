@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Dalamud.NET.Sdk/14.0.1">
   <PropertyGroup>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Description>FFXIV Economy Intelligence Engine</Description>
     <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
     <IsPackable>false</IsPackable>
@@ -12,10 +12,20 @@
   <ItemGroup>
     <Compile Remove="ECommons\**" />
     <Compile Remove="OtterGui\**" />
+    <Compile Remove="Una.Drawing\**" />
+    <Compile Remove=".temp\**" />
     <EmbeddedResource Remove="ECommons\**" />
     <EmbeddedResource Remove="OtterGui\**" />
+    <EmbeddedResource Remove="Una.Drawing\**" />
+    <EmbeddedResource Remove=".temp\**" />
     <None Remove="ECommons\**" />
     <None Remove="OtterGui\**" />
+    <None Remove="Una.Drawing\**" />
+    <None Remove=".temp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="UI\Templates\**\*.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +34,7 @@
     <Reference Include="Dalamud.Bindings.ImGui" Private="false" />
     <ProjectReference Include="ECommons\ECommons\ECommons.csproj" />
     <ProjectReference Include="OtterGui\OtterGui.csproj" />
+    <ProjectReference Include="Una.Drawing\Una.Drawing\Una.Drawing.csproj" />
   </ItemGroup>
 
 </Project>

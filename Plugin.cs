@@ -8,6 +8,7 @@ using Quartermaster.Data.Database;
 using Quartermaster.Engine;
 using Quartermaster.Ipc;
 using Quartermaster.UI;
+using Quartermaster.UI.Panels;
 
 namespace Quartermaster;
 
@@ -40,6 +41,9 @@ public sealed class Plugin : IDalamudPlugin
     {
         ECommonsMain.Init(PluginInterface, this);
 
+        // Initialize Una.Drawing
+        QuartermasterDrawing.Initialize(PluginInterface);
+
         Configuration = PluginInterface.GetPluginConfig() as PluginConfig ?? new PluginConfig();
 
         // Initialize layers bottom-up
@@ -47,9 +51,31 @@ public sealed class Plugin : IDalamudPlugin
         _ipcBridge = new IpcBridge();
         _engine = new WatchlistProcessor();
         _poller = new BackgroundPoller();
-        _anchorBar = new AnchorBar();
-        _drawerManager = new DrawerManager();
         _confirmModal = new ConfirmActionModal();
+
+        // UI — DrawerManager must be created before AnchorBar
+        _drawerManager = new DrawerManager();
+        _anchorBar = new AnchorBar(_drawerManager);
+
+        // Register all panels
+        var panels = new IDrawerPanel[]
+        {
+            new WatchlistPanel(),
+            new AlertPanel(),
+            new MarketPanel(),
+            new SubmarinePanel(),
+            new RetainerPanel(),
+            new SettingsPanel(),
+        };
+
+        foreach (var panel in panels)
+        {
+            _anchorBar.RegisterPanel(panel);
+            _drawerManager.RegisterPanel(panel);
+        }
+
+        // Set anchor side from config
+        _anchorBar.SetSide(Configuration.AnchorSide);
 
         Framework.Update += OnUpdate;
         PluginInterface.UiBuilder.Draw += OnDraw;
@@ -71,12 +97,13 @@ public sealed class Plugin : IDalamudPlugin
 
     public void Dispose()
     {
-        ECommonsMain.Dispose();
-
         Framework.Update -= OnUpdate;
         PluginInterface.UiBuilder.Draw -= OnDraw;
 
         _poller.Dispose();
         _db.Dispose();
+
+        QuartermasterDrawing.Dispose();
+        ECommonsMain.Dispose();
     }
 }

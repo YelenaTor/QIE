@@ -1,0 +1,58 @@
+<udt>
+    <!--
+        Ingredient Tree — collapsible recipe cost breakdown.
+    -->
+
+    <template name="ingredient-row">
+        <argument name="depth" type="int32" default="0"/>
+        <root>
+            <node class="ingredient-row">
+                <node class="ingredient-icon"/>
+                <node class="ingredient-name qm-text"/>
+                <node class="ingredient-qty qm-text muted"/>
+                <node class="ingredient-cost qm-text"/>
+                <node class="ingredient-source qm-badge"/>
+            </node>
+        </root>
+    </template>
+
+    <![CDATA[
+    .ingredient-row {
+        auto-size: grow fit;
+        gap: 6;
+        padding: 2 0;
+
+        &:hover { background-color: 0x10FFFFFF; border-radius: 4; }
+    }
+
+    .ingredient-icon {
+        size: 20 20;
+        anchor: middle-center;
+        border-radius: 3;
+    }
+
+    .ingredient-name {
+        auto-size: grow fit;
+        anchor: middle-left;
+    }
+
+    .ingredient-qty {
+        auto-size: fit;
+        anchor: middle-right;
+    }
+
+    .ingredient-cost {
+        auto-size: fit;
+        anchor: middle-right;
+        font-size: 12;
+        color: 0xFFFFD700;
+    }
+
+    .ingredient-source {
+        font-size: 9;
+        &.npc { background-color: 0x402196F3; color: 0xFF90CAF9; }
+        &.mb  { background-color: 0x40FF9800; color: 0xFFFFCC80; }
+        &.gather { background-color: 0x404CAF50; color: 0xFFA5D6A7; }
+    }
+    ]]>
+</udt>

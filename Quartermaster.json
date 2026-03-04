@@ -4,7 +4,7 @@
     "InternalName": "Quartermaster",
     "Punchline": "FFXIV Economy Intelligence Engine — profit alerts, market analysis, and IPC orchestration.",
     "Description": "Consolidates market, crafting, retainer, and submarine profit data into one always-available dashboard. Evaluates profitability continuously against a user-defined watchlist and emits actionable alerts. Orchestrates actions across other Dalamud plugins (Artisan, AutoRetainer, GatherBuddyReborn) via IPC — always with user approval.",
-    "AssemblyVersion": "0.1.0.0",
+    "AssemblyVersion": "0.2.0.0",
     "ApplicableVersion": "any",
     "DalamudApiLevel": 14,
     "LoadRequiredState": 0,
