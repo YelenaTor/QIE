@@ -39,5 +39,8 @@ bld/
 # API secrets
 .env
 
+# Temp/analysis repos
+.temp/
+
 # Misc files
 Quartermaster-Architecture.md
