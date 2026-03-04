@@ -1,0 +1,73 @@
+<udt>
+    <import from="globals.xml"/>
+
+    <!--
+        Confirm Action Modal — centered overlay for IPC action approval.
+    -->
+
+    <node id="ConfirmModal" class="confirm-modal">
+        <node class="confirm-backdrop"/>
+        <node class="confirm-dialog">
+            <node class="confirm-bg"/>
+            <node id="ConfirmTitle" class="confirm-title qm-text"/>
+            <node id="ConfirmDescription" class="confirm-desc qm-text muted"/>
+            <node class="confirm-actions">
+                <node id="ConfirmBtn" class="qm-button primary"/>
+                <node id="AdjustBtn" class="qm-button"/>
+                <node id="CancelBtn" class="qm-button danger"/>
+            </node>
+        </node>
+    </node>
+
+    <![CDATA[
+    .confirm-modal {
+        anchor: none;
+        auto-size: grow;
+    }
+
+    .confirm-backdrop {
+        anchor: none;
+        auto-size: grow;
+        background-color: 0xA0000000;
+    }
+
+    .confirm-dialog {
+        size: 340 0;
+        auto-size: fit;
+        anchor: middle-center;
+        flow: vertical;
+        gap: 12;
+        padding: 20;
+    }
+
+    .confirm-bg {
+        anchor: none;
+        auto-size: grow;
+        background-color: 0xF0202020;
+        border-radius: 10;
+        stroke-color: 0x60FFD700;
+        stroke-width: 1;
+        stroke-inset: 1;
+        stroke-radius: 8;
+        shadow-size: 32;
+        shadow-inset: 8;
+    }
+
+    .confirm-title {
+        font-size: 16;
+        color: 0xFFFFD700;
+        auto-size: grow fit;
+    }
+
+    .confirm-desc {
+        font-size: 13;
+        auto-size: grow fit;
+        padding: 0 0 8 0;
+    }
+
+    .confirm-actions {
+        auto-size: grow fit;
+        gap: 8;
+    }
+    ]]>
+</udt>

@@ -1,0 +1,21 @@
+<udt>
+    <import from="globals.xml"/>
+
+    <!--
+        IPC Status Indicator — shows connection status for each detected plugin.
+    -->
+
+    <template name="ipc-status-row">
+        <root>
+            <node class="ipc-status-row">
+                <node class="ipc-status-dot"/>
+                <node class="ipc-plugin-name qm-text"/>
+                <node class="ipc-status-label"/>
+            </node>
+        </root>
+    </template>
+
+    <![CDATA[
+    /* Styles defined in settings-panel.xml — this template reuses them */
+    ]]>
+</udt>

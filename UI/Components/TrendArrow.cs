@@ -1,15 +1,37 @@
 using Quartermaster.Domain.Enums;
+using Una.Drawing;
 
 namespace Quartermaster.UI.Components;
 
 /// <summary>
-/// Price trend indicator (↑ ↓ → ~).
+/// Directional trend indicator. Returns a styled Node.
 /// </summary>
-public class TrendArrow
+public static class TrendArrow
 {
-    public void Draw(MarketTrend trend)
+    public static Node Build(MarketTrend trend)
     {
-        // TODO: Render colored arrow based on trend direction
-        // Rising = green ↑, Falling = red ↓, Stable = grey →, Volatile = yellow ~
+        var node = new Node { ClassList = { "trend-arrow" } };
+
+        switch (trend)
+        {
+            case MarketTrend.Rising:
+                node.ClassList.Add("rising");
+                node.NodeValue = "\u2191"; // ↑
+                break;
+            case MarketTrend.Falling:
+                node.ClassList.Add("falling");
+                node.NodeValue = "\u2193"; // ↓
+                break;
+            case MarketTrend.Stable:
+                node.ClassList.Add("stable");
+                node.NodeValue = "\u2192"; // →
+                break;
+            case MarketTrend.Volatile:
+                node.ClassList.Add("volatile");
+                node.NodeValue = "\u2195"; // ↕
+                break;
+        }
+
+        return node;
     }
 }

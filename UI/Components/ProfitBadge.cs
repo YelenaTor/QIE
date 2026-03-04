@@ -1,13 +1,32 @@
+using Una.Drawing;
+
 namespace Quartermaster.UI.Components;
 
 /// <summary>
-/// Reusable profit margin chip showing profit percentage with color coding.
+/// Colored pill showing profit margin. Returns a styled Node.
 /// </summary>
-public class ProfitBadge
+public static class ProfitBadge
 {
-    public void Draw(decimal profitPerUnit, float profitMarginPercent)
+    public static Node Build(decimal profit)
     {
-        // TODO: Render colored badge (green for positive, red for negative)
-        // TODO: Format as percentage and absolute value
+        var node = new Node { ClassList = { "qm-badge", "profit-badge" } };
+
+        if (profit > 0)
+        {
+            node.ClassList.Add("positive");
+            node.NodeValue = $"+{profit:N0}%";
+        }
+        else if (profit < 0)
+        {
+            node.ClassList.Add("negative");
+            node.NodeValue = $"{profit:N0}%";
+        }
+        else
+        {
+            node.ClassList.Add("neutral");
+            node.NodeValue = "0%";
+        }
+
+        return node;
     }
 }

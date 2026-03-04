@@ -1,3 +1,5 @@
+using Una.Drawing;
+
 namespace Quartermaster.UI.Panels;
 
 /// <summary>
@@ -11,10 +13,26 @@ public class WatchlistPanel : IDrawerPanel
     public string Tooltip => "Watchlist — track item profitability";
     public bool HasUnreadBadge => false;
 
-    public void Draw()
+    private Node? _rootNode;
+
+    public Node BuildContent()
     {
-        // TODO: Search/add item bar
-        // TODO: Item list rows (icon, name, current profit, trend arrow, active badge)
-        // TODO: Expand row → inline threshold editor
+        var doc = QuartermasterDrawing.LoadDocument("watchlist-panel.xml");
+        _rootNode = doc.RootNode!;
+
+        var searchPlaceholder = _rootNode.FindById("SearchPlaceholder");
+        if (searchPlaceholder is not null)
+            searchPlaceholder.NodeValue = "Search items to track...";
+
+        var emptyIcon = _rootNode.QuerySelector(".empty-icon");
+        if (emptyIcon is not null)
+            emptyIcon.NodeValue = "\uF002"; // search icon
+
+        var emptyText = _rootNode.QuerySelector(".empty-text");
+        if (emptyText is not null)
+            emptyText.NodeValue = "No items on your watchlist yet.\nSearch above to add items.";
+
+        // Items will be populated dynamically when data is available
+        return _rootNode;
     }
 }

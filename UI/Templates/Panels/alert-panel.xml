@@ -1,0 +1,54 @@
+<udt>
+    <import from="globals.xml"/>
+
+    <!--
+        Alert Panel — feed of actionable alerts sorted by severity.
+    -->
+
+    <node id="AlertPanel" class="panel-root">
+        <node id="AlertFilters" class="alert-filters">
+            <node id="FilterAll" class="alert-filter-btn qm-badge active"/>
+            <node id="FilterOpportunity" class="alert-filter-btn qm-badge profit"/>
+            <node id="FilterWarning" class="alert-filter-btn qm-badge warning"/>
+            <node id="FilterUrgent" class="alert-filter-btn qm-badge alert"/>
+        </node>
+        <node id="AlertFeed" class="alert-feed scrollbars"/>
+        <node id="AlertEmpty" class="alert-empty">
+            <node class="empty-icon qm-text muted"/>
+            <node class="empty-text qm-text muted"/>
+        </node>
+    </node>
+
+    <![CDATA[
+    .alert-filters {
+        auto-size: grow fit;
+        gap: 6;
+        padding: 0 0 4 0;
+    }
+
+    .alert-filter-btn {
+        padding: 4 12;
+        font-size: 11;
+        border-radius: 12;
+        auto-size: fit;
+        
+        &:hover { background-color: 0x60FFFFFF; }
+        &.active { stroke-color: 0x60FFD700; stroke-width: 1; stroke-inset: 1; stroke-radius: 10; }
+    }
+
+    .alert-feed {
+        auto-size: grow;
+        flow: vertical;
+        gap: 4;
+        overflow: scroll;
+    }
+
+    .alert-empty {
+        auto-size: grow;
+        flow: vertical;
+        gap: 12;
+        anchor: middle-center;
+        padding: 40 0;
+    }
+    ]]>
+</udt>

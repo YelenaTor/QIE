@@ -1,0 +1,117 @@
+<udt>
+    <import from="globals.xml"/>
+
+    <!--
+        Market Panel — deep-dive into a single item's market data.
+    -->
+
+    <node id="MarketPanel" class="panel-root">
+        <node id="MarketHeader" class="market-header">
+            <node id="MarketItemIcon" class="market-item-icon"/>
+            <node class="market-header-info">
+                <node id="MarketItemName" class="qm-text"/>
+                <node id="MarketItemWorld" class="qm-text muted"/>
+            </node>
+        </node>
+
+        <node id="MarketPriceSummary" class="market-price-summary">
+            <node class="price-cell">
+                <node class="price-label qm-text muted"/>
+                <node id="PriceMin" class="price-value qm-text accent"/>
+            </node>
+            <node class="price-cell">
+                <node class="price-label qm-text muted"/>
+                <node id="PriceAvg" class="price-value qm-text"/>
+            </node>
+            <node class="price-cell">
+                <node class="price-label qm-text muted"/>
+                <node id="PriceVelocity" class="price-value qm-text"/>
+            </node>
+            <node class="price-cell">
+                <node class="price-label qm-text muted"/>
+                <node id="PriceListings" class="price-value qm-text"/>
+            </node>
+        </node>
+
+        <node class="qm-section-header"/>
+        <node id="MarketListings" class="market-listings scrollbars"/>
+
+        <node class="qm-section-header"/>
+        <node id="MarketIngredients" class="market-ingredients scrollbars"/>
+
+        <node id="MarketEmpty" class="market-empty">
+            <node class="empty-icon qm-text muted"/>
+            <node class="empty-text qm-text muted"/>
+        </node>
+    </node>
+
+    <![CDATA[
+    .market-header {
+        auto-size: grow fit;
+        gap: 12;
+        padding: 4 0;
+    }
+
+    .market-item-icon {
+        size: 48 48;
+        border-radius: 6;
+        anchor: middle-center;
+    }
+
+    .market-header-info {
+        auto-size: grow fit;
+        flow: vertical;
+        gap: 2;
+        anchor: middle-left;
+    }
+
+    .market-price-summary {
+        auto-size: grow fit;
+        gap: 4;
+        padding: 8 0;
+    }
+
+    .price-cell {
+        auto-size: grow fit;
+        flow: vertical;
+        gap: 2;
+        background-color: 0x15FFFFFF;
+        border-radius: 6;
+        padding: 8;
+        anchor: top-center;
+    }
+
+    .price-label {
+        font-size: 10;
+        auto-size: grow fit;
+    }
+
+    .price-value {
+        font-size: 16;
+        auto-size: grow fit;
+    }
+
+    .market-listings {
+        auto-size: grow fit;
+        flow: vertical;
+        gap: 2;
+        overflow: scroll;
+        max-size: 0 200;
+    }
+
+    .market-ingredients {
+        auto-size: grow fit;
+        flow: vertical;
+        gap: 2;
+        overflow: scroll;
+    }
+
+    .market-empty {
+        auto-size: grow;
+        flow: vertical;
+        gap: 12;
+        anchor: middle-center;
+        padding: 40 0;
+    }
+    ]]>
+</udt>

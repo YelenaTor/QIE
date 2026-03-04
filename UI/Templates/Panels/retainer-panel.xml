@@ -1,0 +1,74 @@
+<udt>
+    <import from="globals.xml"/>
+
+    <!--
+        Retainer Panel — venture status and reassignment suggestions.
+    -->
+
+    <node id="RetainerPanel" class="panel-root">
+        <node class="qm-section-header"/>
+        <node id="RetainerList" class="retainer-list scrollbars"/>
+        <node id="RetainerEmpty" class="retainer-empty">
+            <node class="empty-icon qm-text muted"/>
+            <node class="empty-text qm-text muted"/>
+        </node>
+    </node>
+
+    <![CDATA[
+    .retainer-list {
+        auto-size: grow;
+        flow: vertical;
+        gap: 4;
+        overflow: scroll;
+    }
+
+    .retainer-row {
+        auto-size: grow fit;
+        gap: 8;
+        padding: 6 8;
+        background-color: 0x15FFFFFF;
+        border-radius: 6;
+        
+        &:hover { background-color: 0x25FFFFFF; }
+    }
+
+    .retainer-name {
+        auto-size: grow fit;
+        anchor: middle-left;
+        font-size: 13;
+    }
+
+    .retainer-venture {
+        auto-size: fit;
+        anchor: middle-right;
+        font-size: 11;
+        color: 0xFF909090;
+    }
+
+    .retainer-gilhr {
+        auto-size: fit;
+        anchor: middle-right;
+        color: 0xFFFFD700;
+        font-size: 12;
+    }
+
+    .retainer-status-badge {
+        auto-size: fit;
+        font-size: 9;
+        padding: 2 6;
+        border-radius: 8;
+        
+        &.active { background-color: 0x404CAF50; color: 0xFFA5D6A7; }
+        &.returning { background-color: 0x40FF9800; color: 0xFFFFCC80; }
+        &.idle { background-color: 0x40F44336; color: 0xFFEF9A9A; }
+    }
+
+    .retainer-empty {
+        auto-size: grow;
+        flow: vertical;
+        gap: 12;
+        anchor: middle-center;
+        padding: 40 0;
+    }
+    ]]>
+</udt>

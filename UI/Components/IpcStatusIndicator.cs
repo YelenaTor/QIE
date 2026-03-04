@@ -1,17 +1,32 @@
 using Quartermaster.Domain.Enums;
+using Una.Drawing;
 
 namespace Quartermaster.UI.Components;
 
 /// <summary>
-/// Shows which plugins are detected with green/grey/red indicators.
+/// IPC plugin connection status indicator. Builds status rows for the settings panel.
 /// </summary>
-public class IpcStatusIndicator
+public static class IpcStatusIndicator
 {
-    public void Draw(IpcCapability detectedCapabilities)
+    /// <summary>
+    /// Build a single IPC status row.
+    /// </summary>
+    public static Node Build(string pluginName, bool isConnected)
     {
-        // TODO: For each known capability, show:
-        //   Green dot + name if detected
-        //   Grey dot + name if not detected
-        //   Red dot + name if error
+        var row = new Node { ClassList = { "ipc-status-row" } };
+
+        var dot = new Node { ClassList = { "ipc-status-dot", isConnected ? "connected" : "missing" } };
+
+        var name = new Node { ClassList = { "ipc-plugin-name", "qm-text" } };
+        name.NodeValue = pluginName;
+
+        var status = new Node { ClassList = { "ipc-status-label", isConnected ? "connected" : "missing" } };
+        status.NodeValue = isConnected ? "Connected" : "Not detected";
+
+        row.AppendChild(dot);
+        row.AppendChild(name);
+        row.AppendChild(status);
+
+        return row;
     }
 }

@@ -1,0 +1,144 @@
+<udt>
+    <import from="globals.xml"/>
+
+    <!--
+        Watchlist Panel — item tracking with profit + trend indicators.
+    -->
+
+    <template name="watchlist-item-row">
+        <root>
+            <node class="qm-card watchlist-row">
+                <node class="watchlist-row-left">
+                    <node class="watchlist-item-icon"/>
+                    <node class="watchlist-item-info">
+                        <node class="watchlist-item-name qm-text"/>
+                        <node class="watchlist-item-world qm-text muted"/>
+                    </node>
+                </node>
+                <node class="watchlist-row-right">
+                    <node class="watchlist-item-profit qm-text accent"/>
+                    <node class="watchlist-item-trend"/>
+                    <node class="watchlist-item-badge"/>
+                </node>
+            </node>
+        </root>
+    </template>
+
+    <node id="WatchlistPanel" class="panel-root">
+        <node id="WatchlistSearch" class="watchlist-search">
+            <node class="search-icon qm-text muted"/>
+            <node id="SearchPlaceholder" class="search-placeholder qm-text muted"/>
+        </node>
+        <node id="WatchlistItems" class="watchlist-items scrollbars"/>
+        <node id="WatchlistEmpty" class="watchlist-empty">
+            <node class="empty-icon qm-text muted"/>
+            <node class="empty-text qm-text muted"/>
+        </node>
+    </node>
+
+    <![CDATA[
+    .panel-root {
+        auto-size: grow;
+        flow: vertical;
+        gap: 8;
+    }
+
+    .watchlist-search {
+        auto-size: grow fit;
+        background-color: 0x20FFFFFF;
+        border-radius: 6;
+        stroke-color: 0x20FFFFFF;
+        stroke-width: 1;
+        stroke-inset: 1;
+        stroke-radius: 4;
+        padding: 8 12;
+        gap: 8;
+    }
+
+    .search-icon {
+        size: 16 16;
+        anchor: middle-center;
+        text-align: middle-center;
+        font: 2;
+        font-size: 14;
+    }
+
+    .search-placeholder {
+        auto-size: grow fit;
+        anchor: middle-left;
+        font-size: 12;
+    }
+
+    .watchlist-items {
+        auto-size: grow;
+        flow: vertical;
+        gap: 4;
+        overflow: scroll;
+    }
+
+    .watchlist-row {
+        flow: horizontal;
+        gap: 8;
+    }
+
+    .watchlist-row-left {
+        auto-size: grow fit;
+        gap: 8;
+    }
+
+    .watchlist-item-icon {
+        size: 32 32;
+        border-radius: 4;
+        anchor: middle-center;
+    }
+
+    .watchlist-item-info {
+        auto-size: grow fit;
+        flow: vertical;
+        gap: 2;
+        anchor: middle-left;
+    }
+
+    .watchlist-item-name {
+        font-size: 13;
+    }
+
+    .watchlist-item-world {
+        font-size: 10;
+    }
+
+    .watchlist-row-right {
+        auto-size: fit;
+        gap: 6;
+        anchor: middle-right;
+    }
+
+    .watchlist-item-profit {
+        font-size: 14;
+        anchor: middle-right;
+    }
+
+    .watchlist-empty {
+        auto-size: grow;
+        flow: vertical;
+        gap: 12;
+        anchor: middle-center;
+        padding: 40 0;
+    }
+
+    .empty-icon {
+        font: 2;
+        font-size: 32;
+        anchor: top-center;
+        text-align: middle-center;
+        auto-size: grow fit;
+    }
+
+    .empty-text {
+        font-size: 13;
+        anchor: top-center;
+        text-align: middle-center;
+        auto-size: grow fit;
+    }
+    ]]>
+</udt>

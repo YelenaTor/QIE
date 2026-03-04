@@ -1,7 +1,9 @@
+using Una.Drawing;
+
 namespace Quartermaster.UI.Panels;
 
 /// <summary>
-/// Item detail: price chart, cost breakdown, ingredient tree.
+/// Deep-dive into a single item's market data: price summary, listings, recipe tree.
 /// </summary>
 public class MarketPanel : IDrawerPanel
 {
@@ -11,12 +13,50 @@ public class MarketPanel : IDrawerPanel
     public string Tooltip => "Market — item price analysis";
     public bool HasUnreadBadge => false;
 
-    public void Draw()
+    private Node? _rootNode;
+
+    public Node BuildContent()
     {
-        // TODO: Item selector (defaults to last-viewed)
-        // TODO: Price chart (ImPlot — 7d history, zoom-able)
-        // TODO: Current listings table (qty, price, retainer, world)
-        // TODO: Ingredient cost tree (recursive, collapsible nodes)
-        // TODO: Profit summary chip
+        var doc = QuartermasterDrawing.LoadDocument("market-panel.xml");
+        _rootNode = doc.RootNode!;
+
+        // Set section headers
+        var sections = _rootNode.QuerySelectorAll(".qm-section-header");
+        if (sections.Count >= 2)
+        {
+            sections[0].NodeValue = "CURRENT LISTINGS";
+            sections[1].NodeValue = "RECIPE INGREDIENTS";
+        }
+
+        // Set price summary labels
+        var priceCells = _rootNode.QuerySelectorAll(".price-label");
+        if (priceCells.Count >= 4)
+        {
+            priceCells[0].NodeValue = "MIN PRICE";
+            priceCells[1].NodeValue = "AVG PRICE";
+            priceCells[2].NodeValue = "VELOCITY";
+            priceCells[3].NodeValue = "LISTINGS";
+        }
+
+        // Default placeholders
+        SetNodeText("PriceMin", "—");
+        SetNodeText("PriceAvg", "—");
+        SetNodeText("PriceVelocity", "—");
+        SetNodeText("PriceListings", "—");
+
+        // Empty state
+        var emptyIcon = _rootNode.QuerySelector(".empty-icon");
+        if (emptyIcon is not null) emptyIcon.NodeValue = "\uF201";
+
+        var emptyText = _rootNode.QuerySelector(".empty-text");
+        if (emptyText is not null) emptyText.NodeValue = "Select an item from the Watchlist\nto view market data.";
+
+        return _rootNode;
+    }
+
+    private void SetNodeText(string id, string text)
+    {
+        var node = _rootNode?.FindById(id);
+        if (node is not null) node.NodeValue = text;
     }
 }

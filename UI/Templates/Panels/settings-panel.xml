@@ -1,0 +1,133 @@
+<udt>
+    <import from="globals.xml"/>
+
+    <!--
+        Settings Panel — plugin configuration.
+        Sections: General, Alerts, Polling, IPC Status.
+    -->
+
+    <node id="SettingsPanel" class="panel-root">
+        <!-- General -->
+        <node class="settings-section">
+            <node class="settings-section-header qm-text muted"/>
+            <node class="settings-row">
+                <node class="settings-label qm-text"/>
+                <node id="AnchorSideValue" class="settings-value qm-badge"/>
+            </node>
+            <node class="settings-row">
+                <node class="settings-label qm-text"/>
+                <node id="HomeWorldValue" class="settings-value qm-text muted"/>
+            </node>
+        </node>
+
+        <!-- Polling -->
+        <node class="settings-section">
+            <node class="settings-section-header qm-text muted"/>
+            <node class="settings-row">
+                <node class="settings-label qm-text"/>
+                <node id="PollIntervalValue" class="settings-value qm-text muted"/>
+            </node>
+            <node class="settings-row">
+                <node class="settings-label qm-text"/>
+                <node id="PauseDutyValue" class="settings-value qm-badge"/>
+            </node>
+        </node>
+
+        <!-- Alerts -->
+        <node class="settings-section">
+            <node class="settings-section-header qm-text muted"/>
+            <node class="settings-row">
+                <node class="settings-label qm-text"/>
+                <node id="AlertToastValue" class="settings-value qm-badge"/>
+            </node>
+            <node class="settings-row">
+                <node class="settings-label qm-text"/>
+                <node id="AlertChatValue" class="settings-value qm-badge"/>
+            </node>
+            <node class="settings-row">
+                <node class="settings-label qm-text"/>
+                <node id="MinSeverityValue" class="settings-value qm-badge"/>
+            </node>
+        </node>
+
+        <!-- IPC Status -->
+        <node class="settings-section">
+            <node class="settings-section-header qm-text muted"/>
+            <node id="IpcStatusList" class="ipc-status-list"/>
+        </node>
+    </node>
+
+    <![CDATA[
+    .settings-section {
+        auto-size: grow fit;
+        flow: vertical;
+        gap: 4;
+        padding: 0 0 8 0;
+        border-color: 0x10FFFFFF;
+        border-width: 0 0 1 0;
+        margin: 0 0 4 0;
+    }
+
+    .settings-section-header {
+        font-size: 11;
+        padding: 0 0 4 0;
+        auto-size: grow fit;
+    }
+
+    .settings-row {
+        auto-size: grow fit;
+        gap: 8;
+        padding: 4 0;
+
+        &:hover { background-color: 0x08FFFFFF; border-radius: 4; }
+    }
+
+    .settings-label {
+        auto-size: grow fit;
+        anchor: middle-left;
+        font-size: 13;
+    }
+
+    .settings-value {
+        auto-size: fit;
+        anchor: middle-right;
+        font-size: 12;
+    }
+
+    .ipc-status-list {
+        auto-size: grow fit;
+        flow: vertical;
+        gap: 4;
+    }
+
+    .ipc-status-row {
+        auto-size: grow fit;
+        gap: 8;
+        padding: 4 0;
+    }
+
+    .ipc-plugin-name {
+        auto-size: grow fit;
+        anchor: middle-left;
+        font-size: 12;
+    }
+
+    .ipc-status-dot {
+        size: 8 8;
+        border-radius: 4;
+        anchor: middle-center;
+        
+        &.connected { background-color: 0xFF4CAF50; }
+        &.missing { background-color: 0xFF616161; }
+    }
+
+    .ipc-status-label {
+        auto-size: fit;
+        anchor: middle-right;
+        font-size: 11;
+
+        &.connected { color: 0xFF4CAF50; }
+        &.missing { color: 0xFF616161; }
+    }
+    ]]>
+</udt>

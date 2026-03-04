@@ -7,6 +7,7 @@ namespace Quartermaster.UI;
 /// Controls which panel is open, manages the drawer window lifecycle.
 /// Drawer window: flush against bar, 380px wide, 70% screen height.
 /// Uses Una.Drawing Node tree from drawer.xml template.
+/// Calls active panel's BuildContent() to populate the drawer body.
 /// </summary>
 public class DrawerManager
 {
@@ -27,6 +28,7 @@ public class DrawerManager
         _footerNode = _rootNode.FindById("DrawerFooter")!;
         _closeNode = _rootNode.FindById("DrawerClose")!;
 
+        _closeNode.NodeValue = "\u2715"; // ✕
         _closeNode.OnMouseUp += (_, _) => Close();
     }
 
@@ -37,13 +39,20 @@ public class DrawerManager
 
     public void Toggle(string drawerId)
     {
-        _activeId = _activeId == drawerId ? null : drawerId;
-        UpdateContent();
+        if (_activeId == drawerId)
+        {
+            Close();
+            return;
+        }
+
+        _activeId = drawerId;
+        RebuildContent();
     }
 
     public void Close()
     {
         _activeId = null;
+        ClearBody();
     }
 
     public bool IsOpen => _activeId is not null;
@@ -53,7 +62,7 @@ public class DrawerManager
     /// </summary>
     public void Draw()
     {
-        if (_activeId is null || !_entries.TryGetValue(_activeId, out var entry))
+        if (_activeId is null || !_entries.TryGetValue(_activeId, out _))
             return;
 
         var viewport = ImGuiNET.ImGui.GetMainViewport();
@@ -70,11 +79,25 @@ public class DrawerManager
         _rootNode.Render(drawList, new(xPos, yPos));
     }
 
-    private void UpdateContent()
+    /// <summary>
+    /// Rebuild the drawer body with the active panel's content.
+    /// Call this when data changes and the panel needs to refresh.
+    /// </summary>
+    public void RebuildContent()
     {
-        if (_activeId is not null && _entries.TryGetValue(_activeId, out var entry))
-        {
-            _titleNode.NodeValue = entry.Panel.Title;
-        }
+        if (_activeId is null || !_entries.TryGetValue(_activeId, out var entry))
+            return;
+
+        _titleNode.NodeValue = entry.Panel.Title;
+
+        ClearBody();
+
+        var panelContent = entry.Panel.BuildContent();
+        _bodyNode.AppendChild(panelContent);
+    }
+
+    private void ClearBody()
+    {
+        _bodyNode.ChildNodes.ToList().ForEach(c => _bodyNode.RemoveChild(c));
     }
 }
