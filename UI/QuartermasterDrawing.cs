@@ -14,7 +14,7 @@ internal static class QuartermasterDrawing
 {
     public static void Initialize(IDalamudPluginInterface plugin)
     {
-        DrawingLib.Setup(plugin);
+        DrawingLib.Setup(plugin, downloadGameGlyphs: false);
 
         // Load and register the global stylesheet.
         var globals = LoadDocument("globals.xml");
