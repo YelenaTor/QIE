@@ -31,10 +31,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <Reference Include="Dalamud.Bindings.ImGui">
-      <HintPath>$(DalamudLibPath)Dalamud.Bindings.ImGui.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
     <ProjectReference Include="ECommons\ECommons\ECommons.csproj" />
     <ProjectReference Include="OtterGui\OtterGui.csproj" />
     <ProjectReference Include="Una.Drawing\Una.Drawing\Una.Drawing.csproj" />
