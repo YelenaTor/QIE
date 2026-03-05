@@ -25,7 +25,7 @@ public class SettingsPanel : IDrawerPanel
         var config = Plugin.PluginInterface.GetPluginConfig() as PluginConfig ?? new PluginConfig();
 
         // Set section headers
-        var sectionHeaders = _rootNode.QuerySelectorAll(".settings-section-header");
+        var sectionHeaders = _rootNode.QuerySelectorAll(".settings-section-header").ToList();
         if (sectionHeaders.Count >= 4)
         {
             sectionHeaders[0].NodeValue = "GENERAL";
@@ -35,7 +35,7 @@ public class SettingsPanel : IDrawerPanel
         }
 
         // Set setting labels
-        var labels = _rootNode.QuerySelectorAll(".settings-label");
+        var labels = _rootNode.QuerySelectorAll(".settings-label").ToList();
         if (labels.Count >= 7)
         {
             labels[0].NodeValue = "Anchor Side";
@@ -60,7 +60,7 @@ public class SettingsPanel : IDrawerPanel
         var anchorNode = _rootNode.FindById("AnchorSideValue");
         if (anchorNode is not null)
         {
-            anchorNode.OnMouseUp += (_, _) =>
+            anchorNode.OnMouseUp += _ =>
             {
                 config.AnchorSide = config.AnchorSide == AnchorSide.Left ? AnchorSide.Right : AnchorSide.Left;
                 config.Save();
@@ -72,7 +72,7 @@ public class SettingsPanel : IDrawerPanel
         var pauseNode = _rootNode.FindById("PauseDutyValue");
         if (pauseNode is not null)
         {
-            pauseNode.OnMouseUp += (_, _) =>
+            pauseNode.OnMouseUp += _ =>
             {
                 config.PausePollInDuty = !config.PausePollInDuty;
                 config.Save();
@@ -84,7 +84,7 @@ public class SettingsPanel : IDrawerPanel
         var toastNode = _rootNode.FindById("AlertToastValue");
         if (toastNode is not null)
         {
-            toastNode.OnMouseUp += (_, _) =>
+            toastNode.OnMouseUp += _ =>
             {
                 config.AlertsViaToast = !config.AlertsViaToast;
                 config.Save();
@@ -96,7 +96,7 @@ public class SettingsPanel : IDrawerPanel
         var chatNode = _rootNode.FindById("AlertChatValue");
         if (chatNode is not null)
         {
-            chatNode.OnMouseUp += (_, _) =>
+            chatNode.OnMouseUp += _ =>
             {
                 config.AlertsViaChat = !config.AlertsViaChat;
                 config.Save();

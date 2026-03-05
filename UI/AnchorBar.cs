@@ -1,6 +1,7 @@
 using Quartermaster.Configuration;
 using Quartermaster.Domain.Enums;
 using Quartermaster.UI.Panels;
+using ImGuiNET;
 using Una.Drawing;
 
 namespace Quartermaster.UI;
@@ -45,7 +46,7 @@ public class AnchorBar
         iconNode.Style.FontSize = 16;
 
         // Click handler: toggle the drawer.
-        iconNode.OnMouseUp += (_, _) =>
+        iconNode.OnMouseUp += _ =>
         {
             if (_activeId == panel.Id)
             {
@@ -79,8 +80,8 @@ public class AnchorBar
     {
         UpdateBadges();
 
-        var viewport = ImGuiNET.ImGui.GetMainViewport();
-        var drawList = ImGuiNET.ImGui.GetBackgroundDrawList(viewport);
+        var viewport = ImGui.GetMainViewport();
+        var drawList = ImGui.GetBackgroundDrawList(viewport);
 
         float xPos = _rootNode.ClassList.Contains("right")
             ? viewport.WorkPos.X + viewport.WorkSize.X - 48
@@ -88,8 +89,8 @@ public class AnchorBar
 
         float yPos = viewport.WorkPos.Y + (viewport.WorkSize.Y * 0.15f);
 
-        _rootNode.Style.Size = new(48, (int)(viewport.WorkSize.Y * 0.7f));
-        _rootNode.Render(drawList, new(xPos, yPos));
+        _rootNode.Style.Size = new Size(48, (int)(viewport.WorkSize.Y * 0.7f));
+        _rootNode.Render(drawList, new System.Numerics.Vector2(xPos, yPos));
     }
 
     private void UpdateActiveStates()

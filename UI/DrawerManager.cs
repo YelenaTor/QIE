@@ -1,4 +1,5 @@
 using Quartermaster.UI.Panels;
+using ImGuiNET;
 using Una.Drawing;
 
 namespace Quartermaster.UI;
@@ -29,7 +30,7 @@ public class DrawerManager
         _closeNode = _rootNode.FindById("DrawerClose")!;
 
         _closeNode.NodeValue = "\u2715"; // ✕
-        _closeNode.OnMouseUp += (_, _) => Close();
+        _closeNode.OnMouseUp += _ => Close();
     }
 
     public void RegisterPanel(IDrawerPanel panel)
@@ -65,8 +66,8 @@ public class DrawerManager
         if (_activeId is null || !_entries.TryGetValue(_activeId, out _))
             return;
 
-        var viewport = ImGuiNET.ImGui.GetMainViewport();
-        var drawList = ImGuiNET.ImGui.GetBackgroundDrawList(viewport);
+        var viewport = ImGui.GetMainViewport();
+        var drawList = ImGui.GetBackgroundDrawList(viewport);
 
         // Position flush against anchor bar.
         float drawerHeight = viewport.WorkSize.Y * 0.7f;
@@ -75,8 +76,8 @@ public class DrawerManager
         // TODO: Support left-side anchor (currently right-side only).
         float xPos = viewport.WorkPos.X + viewport.WorkSize.X - 48 - 380;
 
-        _rootNode.Style.Size = new(380, (int)drawerHeight);
-        _rootNode.Render(drawList, new(xPos, yPos));
+        _rootNode.Style.Size = new Size(380, (int)drawerHeight);
+        _rootNode.Render(drawList, new System.Numerics.Vector2(xPos, yPos));
     }
 
     /// <summary>

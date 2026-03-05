@@ -1,3 +1,4 @@
+using ImGuiNET;
 using Una.Drawing;
 
 namespace Quartermaster.UI;
@@ -45,11 +46,11 @@ public class ConfirmActionModal
     {
         if (!IsOpen || _rootNode is null) return;
 
-        var viewport = ImGuiNET.ImGui.GetMainViewport();
-        var drawList = ImGuiNET.ImGui.GetBackgroundDrawList(viewport);
+        var viewport = ImGui.GetMainViewport();
+        var drawList = ImGui.GetBackgroundDrawList(viewport);
 
-        _rootNode.Style.Size = new((int)viewport.WorkSize.X, (int)viewport.WorkSize.Y);
-        _rootNode.Render(drawList, new(viewport.WorkPos.X, viewport.WorkPos.Y));
+        _rootNode.Style.Size = new Size((int)viewport.WorkSize.X, (int)viewport.WorkSize.Y);
+        _rootNode.Render(drawList, new System.Numerics.Vector2(viewport.WorkPos.X, viewport.WorkPos.Y));
     }
 
     private void BuildModal()
@@ -69,7 +70,7 @@ public class ConfirmActionModal
         if (confirmBtn is not null)
         {
             confirmBtn.NodeValue = "Confirm";
-            confirmBtn.OnMouseUp += (_, _) => { _onConfirm?.Invoke(); Close(); };
+            confirmBtn.OnMouseUp += _ => { _onConfirm?.Invoke(); Close(); };
         }
 
         var adjustBtn = _rootNode.FindById("AdjustBtn");
@@ -78,7 +79,7 @@ public class ConfirmActionModal
             if (_onAdjust is not null)
             {
                 adjustBtn.NodeValue = "Adjust";
-                adjustBtn.OnMouseUp += (_, _) => { _onAdjust?.Invoke(); Close(); };
+                adjustBtn.OnMouseUp += _ => { _onAdjust?.Invoke(); Close(); };
             }
             else
             {
@@ -90,14 +91,14 @@ public class ConfirmActionModal
         if (cancelBtn is not null)
         {
             cancelBtn.NodeValue = "Cancel";
-            cancelBtn.OnMouseUp += (_, _) => { _onCancel?.Invoke(); Close(); };
+            cancelBtn.OnMouseUp += _ => { _onCancel?.Invoke(); Close(); };
         }
 
         // Backdrop click = cancel
         var backdrop = _rootNode.QuerySelector(".confirm-backdrop");
         if (backdrop is not null)
         {
-            backdrop.OnMouseUp += (_, _) => { _onCancel?.Invoke(); Close(); };
+            backdrop.OnMouseUp += _ => { _onCancel?.Invoke(); Close(); };
         }
     }
 

@@ -55,7 +55,7 @@ public class AlertPanel : IDrawerPanel
         var node = _rootNode?.FindById(id);
         if (node is null) return;
 
-        node.OnMouseUp += (_, _) =>
+        node.OnMouseUp += _ =>
         {
             _activeFilter = filter;
             UpdateFilterStates();

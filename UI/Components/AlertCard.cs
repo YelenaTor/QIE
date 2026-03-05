@@ -34,15 +34,15 @@ public static class AlertCard
             severityIcon.ClassList.Add(severityClass);
         }
 
-        // Set profit text
+        // Set profit text (using ProjectedProfit from AlertEvent)
         var profit = root.QuerySelector(".alert-profit");
-        if (profit is not null) profit.NodeValue = alert.EstimatedProfit > 0
-            ? $"+{alert.EstimatedProfit:N0}g"
+        if (profit is not null) profit.NodeValue = alert.ProjectedProfit > 0
+            ? $"+{alert.ProjectedProfit:N0}g"
             : "—";
 
-        // Detail text
+        // Detail text (computed from alert fields)
         var detail = root.QuerySelector(".alert-detail");
-        if (detail is not null) detail.NodeValue = alert.Description;
+        if (detail is not null) detail.NodeValue = $"Velocity: {alert.SaleVelocity:F1}/day — Craft ×{alert.SuggestedCraftQuantity}";
 
         // Action buttons
         var actions = root.QuerySelector(".alert-card-actions");
@@ -52,7 +52,7 @@ public static class AlertCard
             {
                 var craftBtn = new Node { ClassList = { "qm-button" } };
                 craftBtn.NodeValue = "Craft";
-                craftBtn.OnMouseUp += (_, _) => onCraft();
+                craftBtn.OnMouseUp += _ => onCraft();
                 actions.AppendChild(craftBtn);
             }
 
@@ -60,7 +60,7 @@ public static class AlertCard
             {
                 var gatherBtn = new Node { ClassList = { "qm-button" } };
                 gatherBtn.NodeValue = "Gather";
-                gatherBtn.OnMouseUp += (_, _) => onGather();
+                gatherBtn.OnMouseUp += _ => onGather();
                 actions.AppendChild(gatherBtn);
             }
 
@@ -68,7 +68,7 @@ public static class AlertCard
             {
                 var dismissBtn = new Node { ClassList = { "qm-button" } };
                 dismissBtn.NodeValue = "Dismiss";
-                dismissBtn.OnMouseUp += (_, _) => onDismiss();
+                dismissBtn.OnMouseUp += _ => onDismiss();
                 actions.AppendChild(dismissBtn);
             }
         }

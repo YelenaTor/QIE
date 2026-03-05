@@ -37,15 +37,15 @@ public class HttpClientFactory : IDisposable
                 ct.ThrowIfCancellationRequested();
                 return await action(_client);
             }
+            catch (TaskCanceledException) when (!ct.IsCancellationRequested && attempt < 2)
+            {
+                Plugin.Log.Warning($"[QM] HTTP request timed out (attempt {attempt + 1}/3).");
+                await Task.Delay(TimeSpan.FromMilliseconds(500 * (attempt + 1)), ct);
+            }
             catch (OperationCanceledException) { throw; }
             catch (HttpRequestException ex) when (attempt < 2)
             {
                 Plugin.Log.Warning($"[QM] HTTP request failed (attempt {attempt + 1}/3): {ex.Message}");
-                await Task.Delay(TimeSpan.FromMilliseconds(500 * (attempt + 1)), ct);
-            }
-            catch (TaskCanceledException) when (!ct.IsCancellationRequested && attempt < 2)
-            {
-                Plugin.Log.Warning($"[QM] HTTP request timed out (attempt {attempt + 1}/3).");
                 await Task.Delay(TimeSpan.FromMilliseconds(500 * (attempt + 1)), ct);
             }
         }

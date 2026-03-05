@@ -21,7 +21,7 @@ public class MarketPanel : IDrawerPanel
         _rootNode = doc.RootNode!;
 
         // Set section headers
-        var sections = _rootNode.QuerySelectorAll(".qm-section-header");
+        var sections = _rootNode.QuerySelectorAll(".qm-section-header").ToList();
         if (sections.Count >= 2)
         {
             sections[0].NodeValue = "CURRENT LISTINGS";
@@ -29,7 +29,7 @@ public class MarketPanel : IDrawerPanel
         }
 
         // Set price summary labels
-        var priceCells = _rootNode.QuerySelectorAll(".price-label");
+        var priceCells = _rootNode.QuerySelectorAll(".price-label").ToList();
         if (priceCells.Count >= 4)
         {
             priceCells[0].NodeValue = "MIN PRICE";
