@@ -43,8 +43,9 @@ jobs:
 
     - name: Build with dotnet
       run: |
+        $version = "${{ github.ref_name }}".TrimStart('v')
         dotnet restore
-        dotnet build Quartermaster.csproj --configuration Release --output ./publish
+        dotnet build Quartermaster.csproj --configuration Release --output ./publish /p:Version=$version
 
     - name: Create ZIP and repo.json
       run: |
