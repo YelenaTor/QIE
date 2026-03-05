@@ -19,7 +19,6 @@
         auto-size: grow;
         flow: vertical;
         gap: 4;
-        overflow: scroll;
     }
 
     .retainer-row {

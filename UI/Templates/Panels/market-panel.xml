@@ -95,7 +95,6 @@
         auto-size: grow fit;
         flow: vertical;
         gap: 2;
-        overflow: scroll;
         max-size: 0 200;
     }
 
@@ -103,7 +102,6 @@
         auto-size: grow fit;
         flow: vertical;
         gap: 2;
-        overflow: scroll;
     }
 
     .market-empty {

@@ -67,7 +67,6 @@
         padding: 8 12;
         gap: 6;
         flow: vertical;
-        overflow: scroll;
     }
 
     .drawer-footer {
