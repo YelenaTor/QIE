@@ -7,6 +7,7 @@
     "AssemblyVersion": "0.4.0.0",
     "ApplicableVersion": "any",
     "DalamudApiLevel": 14,
+    "IconUrl": "https://raw.githubusercontent.com/YelenaTor/QIE/master/Resources/Icons/icon.png",
     "LoadRequiredState": 0,
     "LoadSync": false,
     "LoadPriority": 0,
@@ -17,5 +18,6 @@
         "retainer",
         "submarine",
         "profit"
-    ]
+    ],
+    "Changelog": "v0.4.8\n- Added QIE plugin icon\n- Fixed crash on load (Una.Drawing async init)\n- Fixed ImGui namespace for Dalamud API 14 (ImGuiNET → Dalamud.Bindings.ImGui)\n- Fixed Una.Drawing API compatibility (OnMouseUp, QuerySelectorAll)\n- Added GlobalUsings.cs for Dalamud SDK\n- Added Resources directory for icons, fonts, textures"
 }
